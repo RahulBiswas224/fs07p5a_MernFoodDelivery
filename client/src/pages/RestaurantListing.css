@@ -1,0 +1,13 @@
+.restaurant-listing {
+  padding: 2rem;
+}
+
+.restaurant-listing h2 {
+  margin-bottom: 1.5rem;
+}
+
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
