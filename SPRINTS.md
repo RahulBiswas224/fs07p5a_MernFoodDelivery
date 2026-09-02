@@ -21,7 +21,12 @@ Target completion: Sep 8, 2026
 - Restaurant listing UI component (static/mock data)
 - Basic CSS styling
 
-## Sprint 2 — Up next
-- Express server setup
-- MongoDB connection via Mongoose
-- REST APIs for users, restaurants, menus
+## Sprint 2 — Done ✅
+- Express server setup (server.js, middleware, error handling, health check route)
+- MongoDB connection via Mongoose (config/db.js)
+- Models: User, Restaurant, MenuItem
+- REST APIs (full CRUD) for users, restaurants, and menu items
+- Password hashing on user creation (bcryptjs) — full JWT auth login/signup comes in Sprint 3
+
+## Sprint 3 — Up next
+- JWT authentication (signup/login endpoints, auth middleware, protected routes)
