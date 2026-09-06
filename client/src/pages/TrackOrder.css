@@ -1,0 +1,44 @@
+.track-page {
+  padding: 2rem;
+  max-width: 500px;
+}
+
+.tracker {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.tracker-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  text-align: center;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  color: #aaa;
+}
+
+.tracker-step.active {
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+.tracker-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ddd;
+}
+
+.tracker-step.active .tracker-dot {
+  background-color: #ff6b35;
+}
+
+.live-note {
+  color: #888;
+  font-size: 0.85rem;
+}
