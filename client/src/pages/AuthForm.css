@@ -1,0 +1,40 @@
+.auth-form-page {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.auth-form input {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.auth-form button {
+  background-color: #ff6b35;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-error {
+  color: #d33;
+  font-size: 0.9rem;
+}

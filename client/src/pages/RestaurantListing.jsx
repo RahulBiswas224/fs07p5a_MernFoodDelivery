@@ -1,21 +1,41 @@
+import { useEffect, useState } from 'react'
 import RestaurantCard from '../components/RestaurantCard.jsx'
+import api from '../services/api.js'
 import './RestaurantListing.css'
 
-// Mock data — will be replaced by API calls in Sprint 5
-const mockRestaurants = [
-  { id: 1, name: 'Spice Villa', cuisine: 'Indian', rating: 4.5, image: 'https://placehold.co/300x150?text=Spice+Villa' },
-  { id: 2, name: 'Pasta Palace', cuisine: 'Italian', rating: 4.3, image: 'https://placehold.co/300x150?text=Pasta+Palace' },
-  { id: 3, name: 'Sushi Central', cuisine: 'Japanese', rating: 4.7, image: 'https://placehold.co/300x150?text=Sushi+Central' },
-  { id: 4, name: 'Burger Hub', cuisine: 'American', rating: 4.1, image: 'https://placehold.co/300x150?text=Burger+Hub' },
-]
-
 function RestaurantListing() {
+  const [restaurants, setRestaurants] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    api
+      .get('/restaurants')
+      .then((res) => setRestaurants(res.data))
+      .catch(() => setError('Could not load restaurants. Is the backend running?'))
+      .finally(() => setLoading(false))
+  }, [])
+
   return (
     <div className="restaurant-listing">
       <h2>Restaurants near you</h2>
+      {loading && <p>Loading restaurants...</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {!loading && !error && restaurants.length === 0 && (
+        <p>No restaurants found yet. Add some via the API.</p>
+      )}
       <div className="restaurant-grid">
-        {mockRestaurants.map((r) => (
-          <RestaurantCard key={r.id} restaurant={r} />
+        {restaurants.map((r) => (
+          <RestaurantCard
+            key={r._id}
+            restaurant={{
+              id: r._id,
+              name: r.name,
+              cuisine: r.cuisine,
+              rating: r.rating,
+              image: r.image || 'https://placehold.co/300x150?text=' + encodeURIComponent(r.name),
+            }}
+          />
         ))}
       </div>
     </div>
