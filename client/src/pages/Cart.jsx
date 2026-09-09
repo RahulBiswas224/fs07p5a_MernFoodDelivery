@@ -20,12 +20,44 @@ function Cart() {
     setPlacing(true)
     setError('')
     try {
-      await api.post('/orders', {
+      // 1. Create the order in our DB
+      const { data: order } = await api.post('/orders', {
         items: items.map((i) => ({ menuItem: i.menuItemId, quantity: i.quantity, price: i.price })),
         totalAmount: total,
       })
-      clearCart()
-      navigate('/orders')
+
+      // 2. Create a Razorpay payment order for it
+      const { data: payment } = await api.post('/payments/create-order', {
+        amount: total,
+        orderId: order._id,
+      })
+
+      // 3. Open Razorpay Checkout
+      const options = {
+        key: payment.keyId,
+        amount: payment.amount,
+        currency: payment.currency,
+        name: 'FoodExpress',
+        description: `Order #${order._id.slice(-6)}`,
+        order_id: payment.razorpayOrderId,
+        handler: async (response) => {
+          await api.post('/payments/verify', {
+            ...response,
+            orderId: order._id,
+          })
+          clearCart()
+          navigate(`/track/${order._id}`)
+        },
+        prefill: { name: user.name, email: user.email },
+        theme: { color: '#ff6b35' },
+      }
+
+      if (window.Razorpay) {
+        const rzp = new window.Razorpay(options)
+        rzp.open()
+      } else {
+        setError('Payment SDK not loaded. Add the Razorpay checkout script to index.html.')
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Could not place order')
     } finally {
