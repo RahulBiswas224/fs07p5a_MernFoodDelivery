@@ -5,6 +5,7 @@ A full stack food delivery web app where users can browse restaurants, explore m
 **Project Code:** FS07P5A · **Domain:** Full Stack Development · **Client:** Rixi Lab Technologies
 
 ---
+![FoodExpress Preview](./docs/screenshots/demo.png)
 
 ## Features
 
