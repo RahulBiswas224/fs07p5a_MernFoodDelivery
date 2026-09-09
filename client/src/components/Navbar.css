@@ -28,3 +28,20 @@
 .navbar-links a:hover {
   text-decoration: underline;
 }
+
+.navbar-user {
+  font-weight: 500;
+}
+
+.navbar-logout {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+}
+
+.navbar-logout:hover {
+  background-color: rgba(255,255,255,0.15);
+}
