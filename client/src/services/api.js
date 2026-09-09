@@ -1,7 +1,11 @@
 import axios from 'axios'
 
+// In dev, Vite proxies /api to the local backend (see vite.config.js).
+// In production, set VITE_API_URL to the deployed backend's URL (e.g. Render).
+const baseURL = import.meta.env.VITE_API_URL || '/api'
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL,
 })
 
 // Attach JWT token to every request if present
